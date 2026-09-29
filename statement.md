@@ -1,16 +1,26 @@
-# Problem Statement & System Design: Roomie Harmony
+# Project Statement - Roomie Harmony
 
-## 🎯 Problem Statement
+## Problem Statement
+Shared living among roommates often leads to friction over financial transparency and non-uniform division of household chores. Manual tracking leads to miscommunication, unequal work distribution, and lost expense records. There is a need for a lightweight, transparent system that automates chore distribution fairly and keeps a clear record of shared expenses without requiring complex setups or heavy applications.
 
-Living with roommates often introduces friction around shared responsibilities and financial management. Common challenges include:
-1. **Inequitable Chore Distribution**: Unclear chore assignments lead to unequal workloads or forgotten household tasks.
-2. **Opaque Expense Tracking**: Difficulty tracking who paid for shared household supplies (e.g., groceries, utility bills) and calculating fair settlements.
-3. **Lack of Transparency & Auditability**: Absence of simple records showing recent system activities, assigned duties, or financial transactions.
+## Scope of the Project
+Roomie Harmony provides a lightweight, local CLI application focused on solving daily flat management problems[cite: 3]. 
+The scope includes:
+* Managing user profiles for household members[cite: 1, 3].
+* Recording shared financial transactions with export functionality[cite: 1, 2, 3].
+* Assigning chores through custom algorithmic rotation rules[cite: 3, 5].
+* Reverting recent mistakes using stack-based history tracking[cite: 3, 5].
 
-**Roomie Harmony** solves these challenges by providing a centralized CLI application that automates fair task rotation, manages persistent financial records, provides undo safety mechanisms, and enables data exports[cite: 1, 2, 3, 5].
+*Out of Scope:* Real-time cloud sync, payment gateway integration, and multi-tenant web/mobile frontends.
 
----
+## Target Users
+* University students sharing apartments or hostel rooms.
+* Working professionals living in shared accommodations.
+* Small households seeking a transparent way to divide duties and expenses.
 
-## 💡 System Design & Architecture
-
-The application is built using modular Python code separated into data access, domain models, custom data structures, and file export components[cite: 1, 2, 3, 4, 5].
+## High-Level Features
+* **User & Household Management:** Add and store roommate details locally using SQLite[cite: 1, 3].
+* **Expense Recording & CSV Export:** Track spending per user and generate downloadable CSV financial summaries[cite: 1, 2, 3].
+* **Round-Robin Chore Queue:** Distribute chores fairly among roommates using a FIFO queue structure[cite: 3, 5].
+* **Stack-Based Action Undo:** Maintain an internal stack to easily undo recent actions[cite: 3, 5].
+* **Persistent Storage & Logging:** Save application data to an SQLite database (`data/app_database.db`) and write activity logs to `data/activity_log.txt`[cite: 1, 2, 3].
